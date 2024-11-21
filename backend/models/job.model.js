@@ -46,7 +46,7 @@ const jobSchema = new mongoose.Schema({
         ref: "User",
       },
     ],
-});
+}, {timestamps : true});
 
 const Job = mongoose.model("Job", jobSchema);
 
