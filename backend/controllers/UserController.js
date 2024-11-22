@@ -23,7 +23,7 @@ export const register = async (req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    await User.create({
+    const newUser = await User.create({
       fullname,
       email,
       password: hashPassword,
@@ -35,7 +35,7 @@ export const register = async (req, res) => {
       message: "User Register successfully",
       success: true,
       data: {
-        user,
+        newUser
       },
     });
   } catch (error) {
@@ -47,7 +47,7 @@ export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
-    if (!user || !password || !role) {
+    if (!email || !password || !role) {
       return res.status(400).json({
         message: "Please provide correct email and password",
         success: false,
@@ -71,7 +71,7 @@ export const login = async (req, res) => {
       });
     }
 
-    if (role === user.role) {
+    if (role !== user.role) {
       return res.status(400).json({
         message: "Account does not exist with current role",
         status: false,
@@ -116,7 +116,7 @@ export const logout = async (req, res) => {
   }
 };
 
-export const update = async (req, res) => {
+export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, bio, skills } = req.body;
 
@@ -153,7 +153,7 @@ export const update = async (req, res) => {
     await updateUser.save();
 
     return res.status(201).json({
-        message : 'User update Successfully',
+        message : 'User profile update Successfully',
         success : true,
         data : {
             updateUser
