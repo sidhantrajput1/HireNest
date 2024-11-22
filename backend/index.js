@@ -8,7 +8,7 @@ dotenv.config({})
 
 app.get('/' , (req, res) => {
     return res.status(200).json({ 
-        messgae: 'I am coming from backend',
+        message: 'I am coming from backend',
         success : true
     })
 })
