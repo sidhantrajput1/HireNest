@@ -120,14 +120,17 @@ export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, bio, skills } = req.body;
 
-    if (!fullname || !email || !phoneNumber || !password || !bio || !skills) {
-      return res.status(400).json({
-        message: "Something is missing",
-        success: false,
-      });
-    }
+    // if (!fullname || !email || !phoneNumber || !password || !bio || !skills) {
+    //   return res.status(400).json({
+    //     message: "Something is missing",
+    //     success: false,
+    //   });
+    // }
 
-    const splitArray = skills.split(", ");
+    let splitArray;
+    if (skills) {
+      splitArray = skills.split(", ");
+    }
     const userId = req._id;
 
     const updateUser = await User.findByIdAndUpdate(
@@ -138,7 +141,7 @@ export const updateProfile = async (req, res) => {
         phoneNumber,
         password,
         bio,
-        skills,
+        "profile.skills": splitArray || [],
       },
       { new: true, runValidators: true }
     );
