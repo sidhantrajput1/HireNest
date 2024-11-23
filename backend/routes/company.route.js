@@ -1,10 +1,13 @@
 import express from 'express'
-import { getAllCompany, registerCompany } from '../controllers/CompanyController';
+import { getCompany, registerCompany , getCompanyById, updateCompany} from '../controllers/CompanyController.js';
+import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 const router = express.Router();
-
-router.route("/registerCompany").post(registerCompany);
-router.route("/getAllCompany").post(getAllCompany);
+ 
+router.route("/registerCompany").post(isAuthenticated, registerCompany);
+router.route("/get").get(isAuthenticated, getCompany);
+router.route("/get/:id").get(isAuthenticated, getCompanyById);
+router.route("/update/:id").put(isAuthenticated, updateCompany);
 
 
 export default router

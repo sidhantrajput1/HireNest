@@ -2,7 +2,7 @@ import Company from "../models/compnay.model.js";
 
 export const registerCompany = async (req, res) => {
   try {
-    const { companyName } = req.body;
+    const { companyName, userId } = req.body;
     if (!companyName) {
       return res.status(400).json({
         message: "Compnay name is required",
@@ -20,7 +20,7 @@ export const registerCompany = async (req, res) => {
 
     company = await Company.create({
       name: companyName,
-      userId: req.id,
+      userId:userId,
     });
 
     return res.status(200).json({
@@ -33,21 +33,21 @@ export const registerCompany = async (req, res) => {
   }
 };
 
-export const getAllCompany = async (req, res) => {
+export const getCompany = async (req, res) => {
   try {
-    const userId = req.id;
-    const company = await Company.find({ userId });
+    const userId = req._id;
+    // console.log("userId : ", userId)
+    const companies = await Company.find({ userId });
 
-    if (!company) {
-      return res.status(400).json({
-        message: "Companies not found",
+    if (companies.length === 0) { // Check if the array is empty
+      return res.status(404).json({
+        message: "No companies found for this user",
         success: false,
       });
     }
 
     return res.status(200).json({
-      message: "Companies",
-      company,
+      companies, // changed company to companies for consistency
       success: true,
     });
   } catch (error) {
@@ -62,7 +62,7 @@ export const getAllCompany = async (req, res) => {
 export const getCompanyById = async (req, res) => {
   try {
     const companyId = req.params.id;
-    const company = await Company.findById({ companyId });
+    const company = await Company.findById(companyId);
 
     if (!companyId) {
       return res.status(400).json({
@@ -104,7 +104,7 @@ export const updateCompany = async (req, res) => {
     if (!updateCompany) {
         return res.status(404).json({
             message : "User Not Found",
-            success : false
+            success : false,
         })
     }
 
@@ -112,7 +112,8 @@ export const updateCompany = async (req, res) => {
 
     return res.status(201).json({
         message : "Company information Successfully",
-        success : false
+        success : true,
+        updateCompany
     })
 
   } catch (error) {
