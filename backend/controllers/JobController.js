@@ -72,7 +72,11 @@ export const getAllJob = async (req, res) => {
       ],
     };
 
-    const jobs = await Job.find(query);
+    const jobs = await Job.find(query)
+      .populate({
+        path: "company",
+      })
+      .sort({ createdAt:-1 });
 
     if (!jobs) {
       return res.status(200).json({
@@ -110,19 +114,29 @@ export const getJobById = async (req, res) => {
 };
 
 export const getAdminJobs = async (req, res) => {
-  const adminId = req._id;
-
-  const job = await Job.find({ created_by: adminId });
-
-  if (!job) {
-    return res.status(200).json({
-      message: "job not found",
-      success: false,
-    });
-  }
-
-  return res.status(200).json({
-    job,
-    success: true,
-  });
-};
+    try {
+      const adminId = req._id;
+      console.log("Admin ID:", adminId);  
+  
+      const jobs = await Job.find({ created_by: adminId });
+  
+      if (!jobs || jobs.length === 0) {
+        return res.status(404).json({
+          message: "No jobs found for this admin",
+          success: false,
+        });
+      }
+  
+      return res.status(200).json({
+        jobs,
+        success: true,
+      });
+    } catch (error) {
+      console.error("Error fetching admin jobs:", error);
+      return res.status(500).json({
+        message: "Server error",
+        success: false,
+      });
+    }
+  };
+  
