@@ -116,7 +116,7 @@ export const getJobById = async (req, res) => {
 export const getAdminJobs = async (req, res) => {
     try {
       const adminId = req._id;
-      console.log("Admin ID:", adminId);  
+    //   console.log("Admin ID:", adminId);  
   
       const jobs = await Job.find({ created_by: adminId });
   
