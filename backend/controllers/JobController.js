@@ -8,7 +8,7 @@ export const postJob = async (req, res) => {
       requirements,
       salary,
       location,
-      experience,
+      experienceLevel,
       jobType,
       position,
       company,
@@ -24,7 +24,7 @@ export const postJob = async (req, res) => {
       !requirements ||
       !salary ||
       !location ||
-      !experience ||
+      !experienceLevel ||
       !jobType ||
       !position ||
       !company ||
@@ -41,7 +41,7 @@ export const postJob = async (req, res) => {
       title,
       description,
       requirements: requirements.split(", "),
-      experience,
+      experienceLevel,
       salary: Number(salary),
       location,
       jobType,
@@ -90,6 +90,7 @@ export const getAllJob = async (req, res) => {
   }
 };
 
+// for student
 export const getJobById = async (req, res) => {
   const jobId = req.params.id;
 
@@ -104,25 +105,24 @@ export const getJobById = async (req, res) => {
 
   return res.status(200).json({
     job,
-    success : true
-  })
+    success: true,
+  });
 };
 
+export const getAdminJobs = async (req, res) => {
+  const adminId = req._id;
 
-export const getAdminJobs = async (req ,res) => {
-    const adminId = req._id
+  const job = await Job.find({ created_by: adminId });
 
-    const job = await Job.find({created_by:adminId})
+  if (!job) {
+    return res.status(200).json({
+      message: "job not found",
+      success: false,
+    });
+  }
 
-    if (!job) {
-        return res.status(200).json({
-          message: "job not found",
-          success: false,
-        });
-      }
-    
-      return res.status(200).json({
-        job,
-        success : true
-      })
-}
+  return res.status(200).json({
+    job,
+    success: true,
+  });
+};
