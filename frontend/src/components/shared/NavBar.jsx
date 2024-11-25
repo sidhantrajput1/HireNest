@@ -7,6 +7,7 @@ import {
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function NavBar() {
   const [user, setUser] = useState(false);
@@ -26,8 +27,12 @@ export function NavBar() {
           <div>
             {!user ? (
               <div className="flex gap-2">
-                <Button variant="outline">Login</Button>
-                <Button  variant="outline">Signup</Button>
+                <Link to="/login">
+                  <Button variant="outline">Login</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button variant="outline">Signup</Button>
+                </Link>
               </div>
             ) : (
               <Popover>
