@@ -1,8 +1,9 @@
-
+import { Link } from "react-router-dom";
 import { NavBar } from "../shared/NavBar";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { RadioGroup} from "../ui/radio-group";
 
 function Signup() {
   return (
@@ -31,21 +32,39 @@ function Signup() {
               <Input type="password" placeholder="password@gmail.com" />
             </div>
           </div>
-          <div className="">
-            <RadioGroup defaultValue="student" className="flex items-center gap-3 ">
+          <div className="flex items-center justify-between">
+            <RadioGroup
+              className="flex items-center gap-3 my-3  "
+            >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="student" id="r1" />
+                <Input
+                  className="student"
+                  type="radio"
+                  name="role"
+                  value="Student"
+                />
                 <Label htmlFor="r1">Student</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="recruiter" id="r2" />
+                <Input
+                  className="recriuiter"
+                  type="radio"
+                  name="role"
+                  value="recruiter"
+                />
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
             </RadioGroup>
+            <div className="flex items-center gap-2">
+              <Label>Profile</Label>
+              <input accept="image/*" type="file" className="cursor-pointer" />
+            </div>
           </div>
+          <Button className="bg-neutral-800 my-1">Signup</Button>
+          <span className="text-sm">Already have an account? <Link to="/login" className="text-blue-400 cursor-pointer underline underline-offset-1">Login</Link></span>
         </form>
       </div>
-    </div>
+    </div> 
   );
 }
 
