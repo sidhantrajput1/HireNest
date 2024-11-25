@@ -1,11 +1,10 @@
-import { Button } from "./components/ui/button";
+import { NavBar } from "./components/shared/NavBar";
 
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      <Button>Click me</Button>
-    </h1>
+    <div>
+      <NavBar />
+    </div>
   )
 }
 
-// http://localhost:5173/
