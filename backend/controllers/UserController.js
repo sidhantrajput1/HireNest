@@ -58,7 +58,7 @@ export const login = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: "incorrect email and password",
+        message: "Incorrect email and password",
         success: false,
       });
     }
@@ -71,10 +71,10 @@ export const login = async (req, res) => {
       });
     }
 
-    if (role !== user.role) {
+    if (role.toLowerCase() !== user.role.toLowerCase()) {
       return res.status(400).json({
         message: "Account does not exist with current role",
-        status: false,
+        success: false,
       });
     }
 
@@ -89,8 +89,8 @@ export const login = async (req, res) => {
     return res
       .status(201)
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 100,
-        httpsOnly: true,
+        maxAge: 1 * 24 * 60 * 60 * 1000,  // Fixed expiration time to 1 day
+        httpOnly: true,
         sameSite: "strict",
       })
       .json({
@@ -102,6 +102,10 @@ export const login = async (req, res) => {
       });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong, please try again later",
+      success: false,
+    });
   }
 };
 
