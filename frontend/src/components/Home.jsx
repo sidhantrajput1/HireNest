@@ -1,3 +1,4 @@
+import CategoryCarousel from "./CategoryCarousel"
 import HeroSection from "./HeroSection"
 import { NavBar } from "./shared/NavBar"
 
@@ -6,7 +7,7 @@ function Home() {
         <div>
             <NavBar/>
             <HeroSection />
-            {/* <CategoryCarousel /> */}
+            <CategoryCarousel />
             {/* <LatestJobs /> */}
             {/* <Footer /> */}
         </div>
