@@ -8,6 +8,10 @@ import { useState } from "react";
 import axios from "axios";
 // import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
+import { Loader2 } from "lucide-react";
+// import store from "@/redux/store";
 // import { useState } from "react";
 
 function Login() {
@@ -17,7 +21,9 @@ function Login() {
     role: "student",
   });
 
+  const { loading } = useSelector((store) => store.auth);
   const naigate = useNavigate();
+  const dispatch = useDispatch();
 
   function changeEventHandler(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -26,12 +32,17 @@ function Login() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/user/login", input, {
-        headers : {
-          "content-Type" : "application/json"
-        },
-        withCredentials : false
-      });
+      dispatch(setLoading());
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/user/login",
+        input,
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+          withCredentials: false,
+        }
+      );
 
       if (res.data.success) {
         naigate("/");
@@ -39,7 +50,9 @@ function Login() {
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
-  console.log(error); 
+      console.log(error);
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -68,11 +81,11 @@ function Login() {
             <div className="space-y-1">
               <label>Password</label>
               <Input
-                 type="password"
-                 name="password"
-                 value={input.password}
-                 onChange={changeEventHandler}
-                 placeholder="password@123" 
+                type="password"
+                name="password"
+                value={input.password}
+                onChange={changeEventHandler}
+                placeholder="password@123"
               />
             </div>
           </div>
@@ -94,7 +107,7 @@ function Login() {
                   className="recriuiter"
                   type="radio"
                   name="role"
-                  checked={input.role === "recruiter"} 
+                  checked={input.role === "recruiter"}
                   onChange={changeEventHandler}
                   value="recruiter"
                 />
@@ -102,7 +115,14 @@ function Login() {
               </div>
             </RadioGroup>
           </div>
-          <Button className="bg-neutral-800 my-1">Login</Button>
+          {loading ? (
+            <Button>
+              <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+              Please Wait
+            </Button>
+          ) : (
+            <Button className="bg-neutral-800 my-1">Login</Button>
+          )}
           <span className="text-sm">
             Don&apos;t have an account?{" "}
             <Link

@@ -8,6 +8,9 @@ import { useState } from "react";
 import axios from "axios";
 // import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
+import { Loader2 } from "lucide-react";
 
 function Signup() {
   const [input, setInput] = useState({
@@ -19,7 +22,9 @@ function Signup() {
     file: "",
   });
 
-  const navigate = useNavigate()
+  const { loading } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function changeEventHandler(e) {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -33,6 +38,7 @@ function Signup() {
     e.preventDefault();
 
     try {
+      dispatch(setLoading(true));
       const formData = new FormData();
       formData.append("fullname", input.fullname);
       formData.append("email", input.email);
@@ -41,23 +47,28 @@ function Signup() {
       formData.append("role", input.role);
 
       if (input.file) {
-        formData.append("profilePhoto", input.file);  // Attach the file
+        formData.append("profilePhoto", input.file); // Attach the file
       }
 
-      const res = await axios.post("http://localhost:8000/api/v1/user/register", formData, {
-        headers : {
-          "content-Type" : "application/json"
-        },
-        withCredentials : false
-      });
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/user/register",
+        formData,
+        {
+          headers: {
+            "content-Type": "application/json",
+          },
+          withCredentials: false,
+        }
+      );
 
       if (res.data.success) {
-        navigate('/login');
+        navigate("/login");
         toast.success(res.data.message);
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
+    } finally {
+      dispatch(setLoading(false))
     }
   };
 
@@ -148,7 +159,15 @@ function Signup() {
               />
             </div>
           </div>
-          <Button className="bg-neutral-800 my-1">Signup</Button>
+          {loading ? (
+            <Button>
+              <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+              Please Wait
+            </Button>
+          ) : (
+            <Button className="bg-neutral-800 my-1">Signup</Button>
+          )}
+          {/* <Button className="bg-neutral-800 my-1">Signup</Button> */}
           <span className="text-sm">
             Already have an account?{" "}
             <Link
