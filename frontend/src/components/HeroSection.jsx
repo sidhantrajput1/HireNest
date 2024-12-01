@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 
 function HeroSection() {
   return (
-    <div className="max-w-screen-xl mx-auto mt-40">
+    <div className="mt-40">
       <div className="text-center flex flex-col justify-center items-center gap-6 my-10">
         <span className="mx-auto px-6 py-3 rounded-full bg-gray-300 font-medium">
           No. 1 <span className="font-semibold font-serif">Hire</span>

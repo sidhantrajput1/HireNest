@@ -27,7 +27,7 @@ const catogry = [
 
 function CategoryCarousel() {
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="">
       <Carousel className="w-full mx-auto my-14 max-w-xl">
         <CarouselContent>
           {catogry.map((cat, i) => (
