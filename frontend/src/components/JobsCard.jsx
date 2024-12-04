@@ -1,9 +1,9 @@
-function Jobs() {
+function JobsCard() {
     return (
         <div className="mx-auto max-w-screen-xl">
-            jobs
+            job card
         </div>
     )
 }
 
-export default Jobs
+export default JobsCard
