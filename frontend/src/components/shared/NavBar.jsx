@@ -22,7 +22,7 @@ export function NavBar() {
           <ul className="flex items-center gap-6 font-medium cursor-pointer">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/jobs">Job</Link></li>
-            <li>Browse</li>
+            <li><Link to="/browse">Browse</Link></li>
           </ul>
           <div>
             {!user ? (
