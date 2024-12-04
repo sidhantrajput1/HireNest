@@ -6,11 +6,12 @@ import {
 } from "@radix-ui/react-popover";
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
-import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function NavBar() {
-  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState(false); 
+  const { user } = useSelector((store) => store.auth);
 
   return (
     <nav className="max-w-screen-xl mx-auto mt-4">
@@ -20,9 +21,15 @@ export function NavBar() {
         </h3>
         <div className="flex items-center gap-10 ">
           <ul className="flex items-center gap-6 font-medium cursor-pointer">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/jobs">Job</Link></li>
-            <li><Link to="/browse">Browse</Link></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/jobs">Job</Link>
+            </li>
+            <li>
+              <Link to="/browse">Browse</Link>
+            </li>
           </ul>
           <div>
             {!user ? (

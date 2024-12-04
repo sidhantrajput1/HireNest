@@ -9,7 +9,7 @@ import axios from "axios";
 // import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "@/redux/authSlice";
+import { setLoading, setUser } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
 // import store from "@/redux/store";
 // import { useState } from "react";
@@ -45,6 +45,7 @@ function Login() {
       );
 
       if (res.data.success) {
+        dispatch(setUser(res.data.user))
         naigate("/");
         toast.success(res.data.message);
       }
