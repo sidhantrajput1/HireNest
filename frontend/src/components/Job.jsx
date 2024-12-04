@@ -11,7 +11,7 @@ function Job() {
       <NavBar />
       <div className="mx-auto max-w-screen-xl mt-8">
         <div className="flex gap-6">
-          <div className="w-[20%]">
+          <div className="w-[35%]">
             <FilterCard />
           </div>
           <>
