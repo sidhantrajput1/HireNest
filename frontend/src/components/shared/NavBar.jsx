@@ -7,7 +7,7 @@ import {
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export function NavBar() {
   const [user, setUser] = useState(false);
@@ -19,9 +19,9 @@ export function NavBar() {
           Hire<span className="text-blue-400">Nest</span>
         </h3>
         <div className="flex items-center gap-10 ">
-          <ul className="flex items-center gap-6 font-medium">
-            <li>Home</li>
-            <li>Jobs</li>
+          <ul className="flex items-center gap-6 font-medium cursor-pointer">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/jobs">Job</Link></li>
             <li>Browse</li>
           </ul>
           <div>
