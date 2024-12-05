@@ -72,7 +72,7 @@ export function NavBar() {
                   <div className="">
                     <div className="flex items-center gap-1 cursor-pointer w-fit pl-2">
                       <User2 />
-                      <Button variant="link">View Profile</Button>
+                      <Button variant="link"><Link to="/profile">View Profile</Link></Button>
                     </div>
                     <div className="flex items-center gap-1 cursor-pointer w-fit pl-2">
                       <LogOut />
