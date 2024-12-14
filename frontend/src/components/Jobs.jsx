@@ -3,8 +3,12 @@ import { Button } from "./ui/button";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
+import { useNavigate } from "react-router-dom";
 
 function Jobs() {
+  const navigate = useNavigate();
+  const jobId = "jsaisiskjsisdnsn";
+
   return (
     <div className="shadow hover:shadow-xl shadow-cyan-400/20 flex flex-col border border-spacing-2 gap-4 mix-blend-multiply p-5 mt-4 rounded-xl m-3">
       <div className="flex justify-between items-center">
@@ -47,7 +51,7 @@ function Jobs() {
         </Badge>
       </div>
       <div className="flex items-center gap-4">
-        <Button variant="outline">Details</Button>
+        <Button onClick={() => navigate(`/description/${jobId}`)} variant="outline">Details</Button>
         <Button variant="outline">Save for later</Button>
       </div>
     </div>

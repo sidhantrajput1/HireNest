@@ -4,11 +4,11 @@ const Footer = () => {
   return (
     <footer className="">
       <div className="mt-16 mx-auto max-w-screen-xl font-serif">
-        <div className="flex flex-col">
+        <div className="flex flex-col md:py-2 ">
           {/* Social Networks Section */}
-          <div className="flex justify-between text-xl bg-gray-100 p-6 font-serif ">
-            <h3>Get Connected with us on social networks</h3>
-            <div className="flex gap-4">
+          <div className="flex sm:flex-row sm:gap-1 justify-between text-xl bg-gray-100 p-6 font-serif ">
+            <h3 className="mb-4 sm:mb-0 ">Get Connected with us on social networks</h3>
+            <div className="flex gap-4 justify-center sm:gap-1 sm:justify-end">
               <Instagram />
               <Twitter />
               <Linkedin />
@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
 
           {/* Main Footer Section */}
-          <div className="p-6 flex gap-16 bg-gray-300/45">
+          <div className="p-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 bg-gray-300/45 container md:py-2 ">
             {/* Company Info */}
             <div className="flex flex-col gap-4">
               <h3 className="font-semibold font-serif">
@@ -75,10 +75,10 @@ const Footer = () => {
 
             {/* Contact Section */}
             <div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+              <div className="flex gap-1 flex-col">
+                <h3 className="text-xl font-semibold mb-2 ">Contact Us</h3>
                 <p className="text-sm">
-                  <strong className="hover:text-orange-300">Phone:</strong> +(91)
+                  <strong className="hover:text-orange-300">Phone:</strong> +(91) 9693610845
                 </p>
                 <p className="text-sm">
                   <strong className="hover:text-orange-300">Email:</strong> support@hirenest.com
@@ -103,6 +103,7 @@ const Footer = () => {
               </a>
             </p>
           </div>
+
         </div>
       </div>
     </footer>
