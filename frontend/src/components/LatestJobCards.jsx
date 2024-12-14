@@ -2,8 +2,8 @@ import { Badge } from "./ui/badge";
 
 function LatestJobCards() {
   return (
-    <div className="container shadow hover:shadow-xl shadow-cyan-400/20 flex flex-col border border-spacing-2 gap-4 mix-blend-multiply p-5 mt-4 rounded-xl m-3 md">
-      <div className="">
+    <div className="shadow hover:shadow-xl shadow-cyan-400/20 flex flex-col border border-spacing-2 gap-4 mix-blend-multiply p-5 mt-4 rounded-xl m-3">
+      <div className="flex gap-3 flex-col">
         <div>
           <h2 className="font-medium text-lg">Microsoft Private Limited</h2>
           <p className="text-sm text-gray-500">India 📍</p>

@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Social Networks Section */}
           <div className="flex sm:flex-row sm:gap-1 justify-between text-xl bg-gray-100 p-6 font-serif ">
             <h3 className="mb-4 sm:mb-0 ">Get Connected with us on social networks</h3>
-            <div className="flex gap-4 justify-center sm:gap-1 sm:justify-end">
+            <div className="flex gap-4 justify-center ">
               <Instagram />
               <Twitter />
               <Linkedin />
