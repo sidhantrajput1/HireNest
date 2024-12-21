@@ -4,11 +4,15 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import AppliedJobTable from "./AppliedJobTable";
+import { useState } from "react";
+import UpdateProfileDialog from "./UpdateProfileDialog";
 
 const skills = ["JavaScript", " React.js", "Node.js", "Docker"];
 
 function Profile() {
   const isResume = true;
+  const [open , setOpen] = useState(false);
+
   return (
     <>
       <NavBar />
@@ -30,7 +34,7 @@ function Profile() {
                 </p>
               </div>
             </div>
-            <Button variant="outline">
+            <Button onClick={(open) => setOpen(!open)} className="text-right" variant="outline">
               <Pen />
             </Button>
           </div>
@@ -76,6 +80,7 @@ function Profile() {
         
         <AppliedJobTable />
       </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen}/>
     </>
   );
 }
