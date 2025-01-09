@@ -5,14 +5,13 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import AppliedJobTable from "./AppliedJobTable";
 import { useState } from "react";
-import UpdateProfileDialog from "./UpdateProfileDialog";
+import UpdateProfileDialog from "./UpdateProfileDialog.jsx";
 
 const skills = ["JavaScript", " React.js", "Node.js", "Docker"];
 
 function Profile() {
   const isResume = true;
   const [open , setOpen] = useState(false);
-
   return (
     <>
       <NavBar />
@@ -34,7 +33,7 @@ function Profile() {
                 </p>
               </div>
             </div>
-            <Button onClick={(open) => setOpen(!open)} className="text-right" variant="outline">
+            <Button onClick={() => setOpen(!open)} className="text-right" variant="outline">
               <Pen />
             </Button>
           </div>
@@ -77,7 +76,6 @@ function Profile() {
       </div>
       <div className="max-w-4xl mx-auto bg-white border rounded-2xl mt-4 p-5 ">
         <h1 className="font-bold pl-2 my-3 text-lg">Applied Job</h1>
-        
         <AppliedJobTable />
       </div>
       <UpdateProfileDialog open={open} setOpen={setOpen}/>
