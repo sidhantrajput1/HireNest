@@ -163,7 +163,7 @@ export const updateProfile = async (req, res) => {
         message : 'User profile update Successfully',
         success : true,
         data : {
-            updateUser
+          updateUser
         }
     })
   } catch (error) {
