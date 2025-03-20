@@ -135,10 +135,10 @@ export const updateProfile = async (req, res) => {
     if (skills) {
       splitArray = skills.split(", ");
     }
-    const userId = req._id;
+    // const userId = req._id;
 
     const updateUser = await User.findByIdAndUpdate(
-      userId,
+      req._id,
       {
         fullname,
         email,
